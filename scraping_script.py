@@ -17,8 +17,10 @@ load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
 username = os.getenv("CHAMBER_USERNAME")
 password = os.getenv("CHAMBER_PASSWORD")
+login_url = os.getenv("LOGIN_URL")
+directory_url = os.getenv("DIRECTORY_URL")
 
-if not openai_api_key or not username or not password:
+if not openai_api_key or not username or not password or not login_url or not directory_url:
     raise ValueError("Missing API key or credentials in .env file!")
 
 # Initialize OpenAI client
@@ -40,7 +42,7 @@ service = Service("/usr/local/bin/chromedriver")
 driver = webdriver.Chrome(service=service, options=options)
 
 # CSV output file
-output_path = "worcester_directory_filtered.csv"
+output_path = "directory_filtered.csv"
 
 # Function to categorize industry using OpenAI
 def categorize_industry(description):
@@ -67,7 +69,6 @@ try:
     print("Current working directory:", os.getcwd())
 
     # Step 1: Open the login page
-    login_url = "https://worcesterchamber.chambermaster.com/Login/"
     driver.get(login_url)
     print("Opened login page.")
 
@@ -83,7 +84,6 @@ try:
     time.sleep(3)
 
     # Step 4: Navigate to the directory page
-    directory_url = "https://worcesterchamber.chambermaster.com/mic/members/search?lm=250&d=Ascending&memId=35962&repId=53751"
     driver.get(directory_url)
     print("Navigated to the directory page.")
     time.sleep(5)
@@ -194,3 +194,4 @@ try:
 finally:
     driver.quit()
     print("Browser closed.")
+
