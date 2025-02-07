@@ -15,8 +15,8 @@ load_dotenv()
 
 # Securely retrieve API key and login credentials
 openai_api_key = os.getenv("OPENAI_API_KEY")
-username = os.getenv("CHAMBER_USERNAME")
-password = os.getenv("CHAMBER_PASSWORD")
+username = os.getenv("USERNAME")
+password = os.getenv("PASSWORD")
 login_url = os.getenv("LOGIN_URL")
 directory_url = os.getenv("DIRECTORY_URL")
 
